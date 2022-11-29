@@ -56,7 +56,7 @@ clean_cy         : the original clean audio, compare the clean audio and the out
 
 I design it considering three situations.
 
-<img src="design_mdian_filter_wav.png" width="350">
+<img src="design_mdian_filter_wav.PNG" width="350">
 
 First, I ignore the first element or the last element is noise (where click = 1), this is the easiest situation, just do median filter in the range [i-padding :i+padding ], to make the result more accurate, also can choose the range: [i - padding - 1  : i + padding +1].
 
@@ -68,7 +68,7 @@ __<font size= '4' color="#0000FF">Cubic Spline filter: </font>__
 
 I deisgn it in the process below:
 
-<img src="design_cubic_wav.png" width="350">
+<img src="design_cubic_wav.PNG" width="350">
 
 First, I have the degraded data [1, 2, 1000, 3, 4], and the 1000 is my click.
 The spline can be controlled by the knots and draw the most suitable curve for these knots. So, I can get an ideal curve without all the clicks. Here, I use the scipy.interpolate .CubicSpline function to complete this step.
@@ -80,23 +80,23 @@ Second, after I having the ideal curve, I can use the amplitude in the ideal cur
 
 1. For the median filter, different lengths were explored to test the effectiveness of the restoration. In particular, different median filter lengths were tested and its corresponding MSE value between clean audio and output audio was observed to deliver the lowest MSE, as shown in the figure below.
 
-<img src="filter length VS MSE.png" width="350">
+<img src="filter length VS MSE.PNG" width="350">
 
 The restored waveform <output_medianFilter.wav> with the optimal filter length is given below:
 
-<img src="waveform_median.png" width="350">
+<img src="waveform_median.PNG" width="350">
 
 2. Using the cubic splines, we observe that it can run faster than the other way.
 
 The restored waveform <output_cubicSplines.wav> with the optimal filter length is given below:
 
-<img src="waveform_cubic.png" width="350">
+<img src="waveform_cubic.PNG" width="350">
 
 3. Comparing the two different interpolation methods, we notice that Cubic Spline Filter method  achieves a lower MSE on average. The runtime of Cubic filter method is much shorter obviously.
 
-<img src="comparison_table.png" width="350">
+<img src="comparison_table.PNG" width="350">
 
-<img src="Comparison.png" width="350">
+<img src="Comparison.PNG" width="350">
 
 From above figures, we can see that the Cubic filter(green column) performs better than median filter(orange column) with less MSE.
 
